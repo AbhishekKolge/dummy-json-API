@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "524b52e1-7215-4e12-bf11-4fbf3704f675",
+		"name": "Dummy Meals",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()\r",
+							"pm.collectionVariables.set(\"API_KEY\", jsonData.apiKey)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test-user@gmail.com\",\r\n    \"password\": \"Test@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/products",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "ss",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "4",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get single product",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/products/1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "https://dummy-json-api-production.up.railway.app/api/v1",
+			"type": "default"
+		},
+		{
+			"key": "API_KEY",
+			"value": ""
+		}
+	]
+}
